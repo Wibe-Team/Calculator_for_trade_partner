@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div id="calc_script">
+        <div id="cs_content">
+            <div class="csc_left_menu" id="csclm_cel_tridera">
+                <div class="csclm_head">Выберите тип программы</div>
+                <div class="csclm_button_double csclm_dohod_nakopity">
+                    <div onclick="menu_item_1_click()" class="csclmbd_but_list active" id="csclmbd_dohod_mounth_left_menu_2">Партнер</div>
+                    <div onclick="menu_item_2_click()" class="csclmbd_but_list" id="csclmbd_nakopity_summu_left_menu_2">Веб-мастер</div>
+                </div>
+                <div class="csclm_gradient_block webmaster">
+                    <div class="csclmgb_name">Среднее коллиичество привлеченных клиентов в месяц</div>
+                    <input class="csclm_white_input csclm_white_input_dubl_string" id="webmaster_input1" type="range" min="1" max="100" step="1" value="8" style="background-image: -webkit-linear-gradient(left, rgb(253, 253, 253) 0%, rgb(253, 253, 253) 7.07071%, rgba(167, 129, 214, 0.7) 7.07071%);">
+                    <input class="csclm_edit_num_input csclm_edit_num_input_dubl_string" id="webmaster_input1_textedit" type="text" value="8">
+                </div>
+                <div class="csclm_gradient_block nobg partner">
+                    <div class="csclmgb_name">Новые клиенты в месяц</div>
+                    <input class="csclm_white_input" id="partner_input1" type="range" min="1" max="100" step="1" value="3" style="background-image: -webkit-linear-gradient(left, rgb(214, 113, 213) 0%, rgb(117, 56, 188) 2.0202%, rgb(248, 248, 248) 2.0202%);">
+                    <input class="csclm_edit_num_input" id="partner_input1_textedit" type="text" value="3">
+                </div>
+                <div class="csclm_gradient_block nobg partner">
+                    <div class="csclmgb_name">Средний торговый оборот</br>клиента за месяц в лотах</div>
+                    <input class="csclm_white_input csclm_white_input_dubl_string" id="partner_input2" type="range" min="1" max="100" step="1" value="5" style="background-image: -webkit-linear-gradient(left, rgb(214, 113, 213) 0%, rgb(117, 56, 188) 4.0404%, rgb(248, 248, 248) 4.0404%);">
+                    <input class="csclm_edit_num_input csclm_edit_num_input_dubl_string" id="partner_input2_textedit" type="text" value="5">
+                </div>
+                <div class="left_info webmaster">
+                  Привлекая от 10 клиентов доход рассчитывается по повышенной ставке
+                </div>
+                <div data-v-9ebf155c="" class="pulsar_arrow_animation play">
+                  <img src="img/play.png" alt="">
+                </div>
+            </div>
+            <div id="csc_content_menu">
+                <div class="csccm_block" id="csccmc1_cel_tridera">
+                    <div class="csccm_container_1">
+                        <div id="csccmc1_graphick_cel_tridera">
+                            <div class="csccmc1fwbf_name" id="csccmc1gct_name">Динамика изменения дохода за 12 месяцев</div>
+                            <div class="csccmc1_graphick two_grephick" id="csccmc1_two_grephick"></div>
+                            <div class="csccmc1_summ_account">
+                                <div class="csccmc1sa_name">Сумма на аккаунте:</div>
+                                <div class="csccmc1sa_value">27 015,62 $</div>
+                            </div>
+                        </div>
+                        <div class="csccmc1_full_width_block" id="csccmc1_info_block">
+                            <div class="csccmc1fwb_content">
+                                <a class="csccmc1fwbc_three_section_button" href="/"><img class="csccmc1fwbctsb_img" src="/img/1.png">
+                                    <div class="csccmc1fwbctsb_name">Мастер класс для партнера</div>
+                                </a>
+                                <a class="csccmc1fwbc_three_section_button" href="/"><img class="csccmc1fwbctsb_img" src="/img/2.png">
+                                    <div class="csccmc1fwbctsb_name">Программа VIP-партнера</div>
+                                </a>
+                                <a class="csccmc1fwbc_three_section_button" href="/"><img class="csccmc1fwbctsb_img" src="/img/3.png">
+                                    <div class="csccmc1fwbctsb_name">Оценка и сопровождение</div>
+                                </a><a class="csccmc1fwbc_button v_center" href="https://openfx.by/profile/register">Cтать партнером</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div class="attention">
+      Внимание!
+      <ul class="no-style">
+        <li>Расчет носит исключительно ознакомительный характер, не гарантирует получения дохода в будущем и не является публичной офертой.</li> 
+        <li>Рассчитанный доход приведен для наиболее часто используемого инструмента - EURUSD На стандартном аккаунте.</li> 
+      </ul>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script>
+
+
+
+
+
+
+let webmaster_input1_value = 8;
+let webmaster_input1 = $('#webmaster_input1');
+
+let partner_input1_value = 8;
+let partner_input1 = $('#partner_input1');
+let partner_input2_value = 8;
+let partner_input2 = $('#partner_input2');
+
+let annual_income;
+
+$('#csclm_calc').removeClass('active');
+$('#scscmhml_calc').removeClass('active');
+$('#csccmc1_calc').removeClass('active');
+$('#csclm_cel_tridera').addClass('active');
+$('#csccmc1_cel_tridera').addClass('active');
+$('#scscmhml_cel').addClass('active');
+
+jQuery(document).ready(function($) {
+    menu_item_1_click();
+});
+
+
+function menu_item_1_click(){
+  $('.webmaster').hide();
+  $('.partner').show();
+  $('#csclmbd_nakopity_summu_left_menu_2').removeClass('active');
+  $('#csclmbd_dohod_mounth_left_menu_2').addClass('active');
+  $('.csccmc1sa_name').html('<span class="bold_title">Годовой доход</span>');
+  $('.csccmc1fwbf_name').html('Динамика изменения дохода за 12 месяцев');
+  generate_colum(12,11);
+  build_columns_for_partner();
+  solve_annual_income();
+  $('.csccmc1sa_name').css({'color':'#000'});
+}
+
+function menu_item_2_click(){
+  $('.webmaster').show();
+  $('.partner').hide();
+  $('#csclmbd_nakopity_summu_left_menu_2').addClass('active');
+  $('#csclmbd_dohod_mounth_left_menu_2').removeClass('active');
+  set_accaunt_money('');
+  $('.csccmc1sa_name').html('средняя сумма пополнения одного клиента');
+  $('.csccmc1fwbf_name').html('Доход от привлеченных клиентов в зависимости от суммы пополнения');
+  generate_colum(11,10);
+
+  build_columns_for_webmaster()
+
+  $('.csccmc1sa_name').css({'color':'#6d41b7'});
+}
+
+function webmaster_input1_update(v) {
+  webmaster_input1_value = v;
+  $('#webmaster_input1_textedit').val(webmaster_input1_value);
+  webmaster_input1.val(webmaster_input1_value);
+  gradient_input(webmaster_input1,'#fdfdfd','#fdfdfd','rgba(167,129,214,.7)');
+}
+
+function partner_input1_update(v) {
+  partner_input1_value = v;
+  $('#partner_input1_textedit').val(partner_input1_value);
+  partner_input1.val(partner_input1_value);
+  gradient_input(partner_input1,'#d671d5','#7538bc','#f8f8f8');
+}
+function partner_input2_update(v) {
+  partner_input2_value = v;
+  $('#partner_input2_textedit').val(partner_input2_value);
+  partner_input2.val(partner_input2_value);
+  gradient_input(partner_input2,'#d671d5','#7538bc','#f8f8f8');
+}
+
+function webmaster_input1_onChange() {
+  webmaster_input1_update(webmaster_input1.val())
+  build_columns_for_webmaster();
+}
+
+function partner_input1_onChange() {
+  partner_input1_update(partner_input1.val())
+  build_columns_for_partner();;
+}
+
+function partner_input2_onChange() {
+  partner_input2_update(partner_input2.val())
+  build_columns_for_partner();;
+}
+
+function webmaster_input1_textedit_onChange() {
+  let data = validate_int(1,100, $('#webmaster_input1_textedit').val() );
+  webmaster_input1_update( data );
+  build_columns_for_webmaster();
+}
+
+function partner_input1_textedit_onChange() {
+  let data = validate_int(1,100, $('#partner_input1_textedit').val() );
+  partner_input1_update( data );
+  build_columns_for_partner();;
+}
+function partner_input2_textedit_onChange() {
+  let data = validate_int(1,100, $('#partner_input2_textedit').val() );
+  partner_input2_update( data );
+  build_columns_for_partner();;
+}
+
+
+
+webmaster_input1.on( "input", webmaster_input1_onChange)
+$('#webmaster_input1_textedit').on( "input", webmaster_input1_textedit_onChange)
+
+partner_input1.on( "input", partner_input1_onChange)
+$('#partner_input1_textedit').on( "input", partner_input1_textedit_onChange)
+
+partner_input2.on( "input", partner_input2_onChange)
+$('#partner_input2_textedit').on( "input", partner_input2_textedit_onChange)
+
+
+function validate_int(start_range, end_range, v) {
+  let parsed_v = parseInt(v)
+
+  if ( parsed_v>= 1 && parsed_v<=100)
+    return parsed_v;
+  else
+    if(parsed_v < 1)  return 1;
+    else
+      if(parsed_v > 100)  return 100;
+      else return 1;
+}
+
+function gradient_input(element,color1,color2,color3){
+  var percent=(element.val()-1) / (element.attr('max')-1) * 100;
+  element.css('background-image', '-webkit-linear-gradient(left, '+color1+' 0%, '+color2+' '+percent+'%, '+color3+' '+percent+'%)');
+}
+
+////////////////////////////////////////////////////
+
+function arr_calc_S_for_all_month() {
+
+    let n = partner_input1_value;
+    let k = partner_input2_value;
+
+    let s1 = n*k*20*0.75;
+
+    let arr = [s1];
+
+    for (let i = 1; i < 12; i++) {
+        arr.push(n*k*20*(i+4)*0.25);
+    }
+
+    return arr;
+}
+
+function solve_annual_income(arr) {
+  let s = 0;
+  for ( let i in arr){
+    s+=arr[i]
+  }
+  return s;
+}
+
+function arr_count_blocks_in_column(arr) {
+    for (let i = 0; i < 12; i++) {
+        arr[i] = Math.round( (arr[i] / arr[11]) * 20 );
+    }
+    return arr;
+}
+
+function validate_count_blocks_to_equal(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        if (arr[i] == arr[i+1])
+            arr[i+1]--;
+    }
+    return arr;
+}
+
+function template_price_in_graph_block(s) {
+    return `<div class="csccmc1fwbgc_row_money">${s} $</div>`;
+}
+function template_time_in_graph_block(t) {
+    return `<div class="csccmc1fwbgc_row_num">${t}</div>`;
+}
+function template_graph_block() {
+    return `<div class="csccmc1fwbgc_row"></div>`;
+}
+function set_accaunt_money(s) {
+   $('.csccmc1sa_value').html(s);
+}
+
+function build_columns_for_partner() {
+
+  let arr = arr_calc_S_for_all_month();
+  let annual_income = solve_annual_income(arr.slice());
+  let arr2 = arr_count_blocks_in_column(arr.slice());
+  let arr3 = validate_count_blocks_to_equal(arr2.slice())
+
+  for (let i = 0; i < 12; i++) {
+      let tmp = template_price_in_graph_block( arr[i].toLocaleString('ru') ) + template_graph_block().repeat(arr3[i]) + template_time_in_graph_block(i+1 + '-й') ;
+      $('.csccmc1fwbg_colum').eq(i).html(tmp);
+  }
+
+  set_accaunt_money(annual_income.toLocaleString('ru') + ' $');
+}
+
+
+function arr_calc_S_from_table() {
+    let n = webmaster_input1_value;
+    let y, table;
+    let arr = [];
+
+    if (n<10&& n>0) {y = 5; table = [10, 20, 50, 70, 100, 140, 180, 230, 290, 330, 0.015*30000] }
+    if (n>=10&& n<=100) {y = 10; table = [20, 30, 70, 100, 140, 180, 220, 270, 330, 400, 0.02*30000] }
+
+    for (let i = 0; i < 11; i++) {
+        arr[i]= n*(table[i]) + n*y;
+    }
+    return arr;
+}
+
+function arr_count_blocks_from_table(arr) {
+  for (let i = 0; i < 11; i++) {
+      arr[i] = Math.round( (arr[i] / arr[10]) * 20 );
+  }
+  return arr;
+}
+
+function build_columns_for_webmaster() {
+
+    let arr = arr_calc_S_from_table();
+
+    let OY = [100, 300, 1000, 2000, 3000, 4000, 5000, 8000, 9000, 20000, 30000];
+
+    let arr2 = arr_count_blocks_from_table(arr.slice());
+
+    // let arr3 = validate_count_blocks_to_equal(arr2.slice())
+    // console.log(arr3);
+
+
+    for (let i = 0; i < 11; i++) {
+        let tmp = template_price_in_graph_block( arr[i].toLocaleString('ru') ) + template_graph_block().repeat(arr2[i]) + template_time_in_graph_block(OY[i].toLocaleString('ru')+' $');
+        $('.csccmc1fwbg_colum').eq(i).html(tmp);
+    }
+
+    $('.csccmc1fwbgc_row_money').css({'color':'#6d41b7'});
+    $('.csccmc1fwbgc_row_num').css({'color':'#6d41b7'});
+
+}
+
+
+
+
+
+
+
+////////////////////////////////////////////////////
+
+generate_colum(12,11);
+function generate_colum(colVal,col_num){
+  var element=document.getElementById('csccmc1_two_grephick');
+  $('#csccmc1_two_grephick').html('');//Удаляем все дочерние элементы
+  var width=100/colVal,
+    padding=width*0.327;
+  col_num=20-col_num;
+  for(var colI=colVal;colI>0;colI--){
+    col_num=col_num>0 ? (col_num<=20 ? col_num : 20) : 1;
+
+    var colum=document.createElement('div');
+
+    colum.setAttribute('class','csccmc1fwbg_colum');
+    colum.style.width=(width-padding)+'%';
+    colum.style.margin='0px '+(padding/2)+'%';
+    var row_money=document.createElement('div');
+    row_money.setAttribute('class','csccmc1fwbgc_row_money');
+    row_money.innerHTML=colVal+' $';
+    colum.appendChild(row_money);
+    for(var rowI=0;rowI<col_num;rowI++){
+      var row=document.createElement('div');
+      row.setAttribute('class','csccmc1fwbgc_row');
+      colum.appendChild(row);
+    }
+    var row_num=document.createElement('div');
+    row_num.setAttribute('class','csccmc1fwbgc_row_num');
+    row_num.innerHTML=colVal+'й';
+    //- row_num.innerHTML=(colVal-colI);
+    colum.appendChild(row_num);
+    colum.setAttribute('day',colVal);
+    //- console.log(colum);
+    element.appendChild(colum);
+    col_num++;
+  }
+}
+
+
+
+
+
+// var hochu_zrarbotat_name=$('#csclmgb_name_left_menu_2'),
+//   input_hochu_zarabotat=$('#scslmgb_hochu_zarabatovat_na_sdelke_input_range_left_menu_2'),
+//   csccmc1gct_name=$('#csccmc1gct_name'),
+//   csccmc1sa_name=$('.csccmc1sa_name');
+//
+//   hochu_zrarbotat_name.html('хочу зарабатывать в месяц');
+//   csccmc1gct_name.html('Динамика изменения дохода');
+//   input_hochu_zarabotat.attr('step',500);
+//   input_hochu_zarabotat.attr('min',500);
+//   input_hochu_zarabotat.attr('max',20000);
+//   input_hochu_zarabotat.val(500);
+//   csccmc1sa_name.html('Cумма на аккаунте');
+//
+// if($('#csclmbd_dohod_mounth_left_menu_2').hasClass('active')){
+//
+// }else{
+//   hochu_zrarbotat_name.html('хочу накопить');
+//   csccmc1gct_name.html('Динамика накопления средств');
+//   input_hochu_zarabotat.attr('step',5000);
+//   input_hochu_zarabotat.attr('min',10000);
+//   input_hochu_zarabotat.attr('max',500000);
+//   input_hochu_zarabotat.val(10000);
+//   csccmc1sa_name.html('Месячный доход на аккаунте');
+// }
+</script>
+
+
+
+</body></html>
